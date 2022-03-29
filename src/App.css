@@ -19,13 +19,45 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.App-title {
+  font-size: calc(15px + 2vmin);
+  margin-top: 3%;
+  align-items: center;
+  text-align: center;
+}
+
+.App-search-bar {
+  margin-top: 2%;
+  font-size: calc(8px + 2vmin);
+  color: cadetblue;
+  text-align: center;
+}
+
+.resultRow {
+  padding: 1% 5%;
+  font-size: calc(10px + 1vmin);
+}
+
+.result {
+  padding: 1% 0;
+  margin: 5% 31%;
+  width: 40%;
+  height: 40%;
+
+  background-color: rgb(255, 242, 199);
+
+}
+
+.resultText {
+  margin: 15%
 }
 
 @keyframes App-logo-spin {
