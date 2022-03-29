@@ -65,7 +65,7 @@ function App() {
       method: "GET",
       headers: myHeaders,
       credentials: "include"
-    }
+     }
 
     const connString = `${process.env.REACT_APP_BRADY_API_URL}${locationName}`;
     console.log(connString);
