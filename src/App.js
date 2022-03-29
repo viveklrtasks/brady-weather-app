@@ -60,7 +60,7 @@ function App() {
 
   }
   const fetchData = async () => {
-    const connString = `${process.env.REACT_APP_LOCAL_URL}${locationName}`;
+    const connString = `${process.env.REACT_APP_BRADY_API_URL}${locationName}`;
     console.log(connString);
     let response = await fetch(connString);
     let data = await response.text();
