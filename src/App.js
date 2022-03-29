@@ -3,8 +3,10 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Table from 'react-bootstrap/Table';
 import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+import WeatherData from "./components/table-component";
 
 function App() {
 
@@ -17,59 +19,15 @@ function App() {
     fetchData();
   }
 
-  function showResult(props) {
-    return (
-      <div className="w-50 p-3">
-        <Table striped bordered>
-          <tbody>
-            <tr>
-              <td colSpan={2}><img width={100} src={props.data.icon}></img></td>
-            </tr>
-            <tr>
-              <td>Region</td>
-              <td>{props.data.region}</td>
-            </tr>
-            <tr>
-              <td>Country</td>
-              <td>{props.data.country}</td>
-            </tr>
-            <tr>
-              <td>Tempreature</td>
-              <td>{props.data.tempreature}</td>
-            </tr>
-            <tr>
-              <td>Condition</td>
-              <td>{props.data.condition}</td>
-            </tr>
-            <tr>
-              <td>Wind</td>
-              <td>{props.data.wind}</td>
-            </tr>
-            <tr>
-              <td>Humidity</td>
-              <td>{props.data.humidity}</td>
-            </tr>
-            <tr>
-              <td>Feels like</td>
-              <td>{props.data.feelsLike}</td>
-            </tr>
-          </tbody>
-        </Table>
-      </div>
-    );
-
-  }
-  //add header
   const fetchData = async () => {
     const myHeaders = {}
     const myInit = {
       method: "GET",
       headers: myHeaders,
       credentials: "include"
-     }
+    }
 
     const connString = `${process.env.REACT_APP_BRADY_API_URL}${locationName}`;
-    console.log(connString);
     let response = await fetch(connString, myInit);
     let data = await response.text();
     let weatherData = JSON.parse(data);
@@ -83,23 +41,33 @@ function App() {
         <div className="App-title">Brady Weather Forcast </div>
       </Row>
 
-
-      <Row class='d-flex align-items-center'>
-        <Form onSubmit={handleSubmit} className="w-50 p-3">
-          <Form.Group className="mb-3" controlId="formLocation">
-            <Form.Label>Location</Form.Label>
-            <Form.Control type="text" required onChange={(e) => setName(e.target.value)} placeholder="Location" />
-            <Form.Text className="text-muted">
-              Please enter a vaild location
-            </Form.Text>
-          </Form.Group>
-
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
-      </Row>
-      <div> {stateResult ? showResult({ data }) : null}</div>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Row >
+          <Form onSubmit={handleSubmit} >
+            <Form.Group controlId="formLocation">
+              <Form.Label>Location</Form.Label>
+              <Row>
+                <Col>
+                  <Form.Control type="text" style={{ width: 400 }} required onChange={(e) => setName(e.target.value)} placeholder="Location" />
+                  <Form.Text className="text-muted">
+                    Please enter a location
+                  </Form.Text>
+                </Col>
+                <Col>
+                  <Button variant="primary" type="submit">
+                    Submit
+                  </Button>
+                </Col>
+              </Row>
+            </Form.Group>
+          </Form>
+        </Row>
+      </div>
+      <div>
+        <div style={{ display: 'flex', margin: 20, justifyContent: 'center' }}>
+          <div> {stateResult ? WeatherData({ data }) : null}</div>
+        </div>
+      </div>
     </div>
 
   );
