@@ -60,9 +60,16 @@ function App() {
 
   }
   const fetchData = async () => {
+    const myHeaders = {}
+    const myInit = {
+      method: "GET",
+      headers: myHeaders,
+      credentials: "include"
+    }
+
     const connString = `${process.env.REACT_APP_BRADY_API_URL}${locationName}`;
     console.log(connString);
-    let response = await fetch(connString);
+    let response = await fetch(connString, myInit);
     let data = await response.text();
     let weatherData = JSON.parse(data);
     setData(weatherData);
